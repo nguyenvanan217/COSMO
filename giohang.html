@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="images/logo.webp">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng</title>
+    <style>
+        .gio_hang {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .san_pham {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            min-width: 700px;
+        }
+        .anh_san_pham img {
+            width: 100px;
+            height: auto;
+        }
+        .ten_san_pham {
+            min-width: 120px;
+            max-width: 150px; /* Giới hạn chiều rộng tối đa */
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .gia, .thanh_tien, .digit, .hanh_dong {
+            min-width: 120px;
+            text-align: center;
+        }
+        .digit div {
+            display: flex;
+            justify-content: center;
+        }
+        .remove, .add {
+            cursor: pointer;
+            padding: 0 10px;
+        }
+        .value {
+            padding: 0 10px;
+        }
+        .hanh_dong {
+            cursor: pointer;
+        }
+        .mua {
+            padding: 20px;
+            text-align: right;
+        }
+        .dat_hang {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .buy {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <li>Miễn phí free ship với đơn hàng đầu tiên khi mua hàng online</li>
+        </div>
+        <div class="logo-main">
+            <li><img src="images/logo.webp" alt="" width="200px" height="90px"></li>
+        </div>
+        <div class="menu-pc-list">
+            <ul class="menu">
+                <li><a href="TrangChu.html">Trang Chủ</a></li>
+                <li><a href="">Sản Phẩm <i class="bi bi-chevron-compact-down"></i></a>
+                    <ul>
+                        <li><a href="DuongDa.html">Dưỡng Da</a></li>
+                    </ul>
+                </li>
+                <li><a href="BaiViet.html">Bài Viết</a></li>
+                <li><a href="VeThuongHieu.html">Về Thương Hiệu</a></li>
+                <li><a href="giohang.html">Giỏ Hàng</a></li>
+            </ul>
+            <label for="menu-mobile-input" class="btn-nav">
+                <i class="bi bi-list"></i>
+            </label>
+        </div>
+        <input type="checkbox" hidden name="" class="menu-input" id="menu-mobile-input">
+        <label for="menu-mobile-input" class="overlay"></label>
+        <div class="menu-mobile">
+            <label for="menu-mobile-input" class="close"><i class="bi bi-x-circle-fill"></i></label>
+            <ul class="menu-mobile-list">
+                <li class="menu-mobile-link"><a href="TrangChu.html">Trang Chủ</a></li>
+                <li class="menu-mobile-link"><a href="DuongDa.html">Dưỡng Da</a></li>
+                <li class="menu-mobile-link"><a href="BaiViet.html">Bài Viết</a></li>
+                <li class="menu-mobile-link"><a href="VeThuongHieu.html">Về Thương Hiệu</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="duongda">
+        <li>Đơn Hàng Của Bạn</li>
+    </div>
+
+    <div class="gio_hang">
+        <div class="san_pham" id="san_pham">
+            <div class="anh_san_pham"><strong>Ảnh Sản Phẩm</strong></div>
+            <div class="ten_san_pham"><strong>Tên sản phẩm</strong></div>
+            <div class="digit"><strong>Số lượng</strong></div>
+            <div class="gia"><strong>Đơn giá</strong></div>
+            <div class="thanh_tien"><strong>Thành tiền</strong></div>
+            <div class="hanh_dong"><strong>Hành động</strong></div>
+        </div>
+        <div id="cart-items"></div>
+        <p id="empty-cart" style="display: none; padding: 20px;">Giỏ hàng của bạn đang trống.</p>
+    </div>
+
+    <div class="mua">
+        <div class="hv"></div>
+        <div class="dat_hang">
+            <div>Tổng tiền:</div>
+            <div class="tong_tien" id="tong_tien">0 đ</div>
+            <div class="buy">Mua Ngay</div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-left">
+            <h4><strong>Sản xuất tại Công ty <br> TNHH MTV COSMO COSMETIC</strong></h4>
+            <li>GPKD số: 3502470607 do Sở KH và ĐT Tỉnh Bà Rịa - <br>Vũng Tàu cấp ngày 24/02/2022
+            Địa chỉ: 72 Huỳnh Tịnh <br> Của , P. Phước Trung, Tp. Bà Rịa, Bà Rịa - Vũng Tàu</li>
+            <div class="icon">
+                <ul>
+                    <li><a href=""><i class="bi bi-facebook"></i></a></li>
+                    <li><a href=""><i class="bi bi-youtube"></i></a></li>
+                    <li><a href=""><i class="bi bi-twitter"></i></a></li>
+                    <li><a href=""><i class="bi bi-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-center1">
+            <h4><strong>Liên Kết</strong></h4>
+            <li><a href=""> ➤ Tìm kiếm</a></li>
+            <li><a href=""> ➤ Giới thiệu</a></li>
+            <li><a href=""> ➤ Chính sách đổi trả</a></li>
+            <li><a href=""> ➤ Chính sách bảo mật</a></li>
+            <li><a href=""> ➤ Chính sách thanh toán</a></li>
+            <li><a href=""> ➤ Chính sách vận chuyển và giao nhận</a></li>
+            <li><a href=""> ➤ Chính sách xử lý khiếu nại</a></li>
+            <li><a href=""> ➤ Chính sách kiểm hàng</a></li>
+        </div>
+        <div class="footer-right">
+            <h4><strong>Thông tin liên hệ</strong></h4>
+            <li>Tầng 10 Tòa Nhà Soho Residence số 100 <br> Cô Giang, P. Cô Giang, Q. 1, TP. HCM</li>
+            <li>0707207990</li>
+            <li>cskh@cosmocosmetic.vn</li>
+        </div>
+    </footer>
+    <div class="in4">
+        <h5><strong>Copyright © 2023 Cosmo Vietnam | Cửa hàng Online Chính Hãng | Natural Cosmetic. Powered by Cosmo Corp</strong></h5>
+    </div>
+
+    <script>
+        // Lấy giỏ hàng từ localStorage
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cart-items');
+        const emptyCartMessage = document.getElementById('empty-cart');
+        const totalPriceElement = document.getElementById('tong_tien');
+
+        // Hàm cập nhật tổng tiền
+        function updateTotalPrice() {
+            const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            totalPriceElement.textContent = total.toLocaleString() + ' đ';
+        }
+
+        // Hàm hiển thị giỏ hàng
+        function renderCart() {
+            cartItemsContainer.innerHTML = ''; // Xóa nội dung cũ
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                totalPriceElement.textContent = '0 đ';
+            } else {
+                emptyCartMessage.style.display = 'none';
+                cart.forEach((item, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.classList.add('san_pham');
+                    cartItem.innerHTML = `
+                        <div class="anh_san_pham"><img src="${item.image}" alt="${item.name}"></div>
+                        <div class="ten_san_pham">${item.name}</div>
+                        <div class="digit">
+                            <div>
+                                <div class="remove" data-index="${index}">-</div>
+                                <div class="value">${item.quantity}</div>
+                                <div class="add" data-index="${index}">+</div>
+                            </div>
+                        </div>
+                        <div class="gia">${item.price.toLocaleString()}<sup>đ</sup></div>
+                        <div class="thanh_tien">${(item.price * item.quantity).toLocaleString()}<sup>đ</sup></div>
+                        <div class="hanh_dong" data-index="${index}"><i class="bi bi-trash-fill"></i></div>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+                updateTotalPrice();
+            }
+        }
+
+        // Gọi hàm để hiển thị giỏ hàng lần đầu
+        renderCart();
+
+        cartItemsContainer.addEventListener('click', function(e) {
+    let index;
+    if (e.target.classList.contains('add') || e.target.classList.contains('remove')) {
+        index = parseInt(e.target.dataset.index, 10);
+    } else if (e.target.classList.contains('bi-trash-fill')) {
+        index = parseInt(e.target.parentElement.dataset.index, 10);
+    } else if (e.target.classList.contains('hanh_dong')) {
+        index = parseInt(e.target.dataset.index, 10);
+    }
+    if (!isNaN(index)) {
+        if (e.target.classList.contains('add')) {
+            cart[index].quantity += 1;
+        } else if (e.target.classList.contains('remove') && cart[index].quantity > 1) {
+            cart[index].quantity -= 1;
+        } else if (e.target.classList.contains('bi-trash-fill') || e.target.classList.contains('hanh_dong')) {
+            cart.splice(index, 1);
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+    }
+});
+
+        // Xử lý nút "Mua Ngay"
+        document.querySelector('.buy').addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Giỏ hàng trống, vui lòng thêm sản phẩm!');
+            } else {
+                alert('Đặt hàng thành công! Tổng tiền: ' + totalPriceElement.textContent);
+            }
+        });
+    </script>
+</body>
+</html>
